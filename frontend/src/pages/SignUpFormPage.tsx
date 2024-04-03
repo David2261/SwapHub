@@ -1,21 +1,21 @@
 import React from "react";
 import Header from "./components/header/Header.tsx";
-import AuthForm from "./components/auth/AuthForm.tsx";
+import SignUpForm from "./components/auth/SignUpForm.tsx";
 
 
-function AuthFormPage(props) {
+function SignUpFormPage(props) {
 
     const handleClickAvatar = () => {
         alert("Avatar clicked");
     }
-    const handleLogin = (formData) => {props.onLogin(formData);}
+    const handleSignUp = (formData) => {props.onSignUp(formData);}
 
     return (
         <div className="AuthFormPage">
             <Header onClickAvatar={handleClickAvatar} />
-            <AuthForm onLogin={handleLogin} />
+                <SignUpForm onSignUp={handleSignUp} />
         </div>
     )
 }
 
-export default AuthFormPage;
+export default SignUpFormPage;

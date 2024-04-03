@@ -1,7 +1,9 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.contrib.auth.models import User
 from apps.main.serializers import (
+    UserSerializer,
     CategorySerializer,
     ThingSerializer,
     ImageSerializer,
@@ -18,6 +20,10 @@ from apps.main.models import (
     Feedback,
 )
 
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()

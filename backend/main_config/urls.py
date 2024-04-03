@@ -22,6 +22,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework_simplejwt import views
 
 from api.main.views import (
+    UserViewSet,
     CategoryViewSet,
     ThingViewSet,
     UserProfileViewSet,
@@ -56,6 +57,8 @@ router.register(r"country", CountryViewSet)
 router.register(r"region", RegionViewSet)
 router.register(r"city", CityViewSet)
 router.register(r"image", ImageViewSet)
+
+router.register(r"user", UserViewSet)
 
 
 urlpatterns = [

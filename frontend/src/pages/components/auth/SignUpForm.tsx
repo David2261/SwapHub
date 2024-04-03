@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 
-function AuthForm(props) {
+function SignUpForm(props) {
     const [inputUsername, setInputUsername] = useState('');
     const [inputPassword, setInputPassword] = useState('');
 
@@ -20,27 +20,27 @@ function AuthForm(props) {
             username: inputUsername,
             password: inputPassword
         };
-        props.onLogin(formData);
+        props.onSignUp(formData);
         
         setInputUsername('');
         setInputPassword('');
     };
 
     return (
-        <form action="AuthForm" onSubmit={submitHandler}>
-            <div className="AuthForm-username">
+        <form action="SignUpForm" onSubmit={submitHandler}>
+            <div className="SignUpForm-username">
                 <label htmlFor='useraname'>Username</label>
                 <input id='username' type="text" value={inputUsername} onChange={changeUsernameHandler} />
             </div>
-            <div className="AuthForm-password">
+            <div className="SignUpForm-password">
                 <label htmlFor='password'>Password</label>
                 <input id='password' type="text" value={inputPassword} onChange={changePasswordHandler} />
             </div>
-            <div className='AuthForm-actions'>
+            <div className='SignUpForm-actions'>
                 <button type='submit'>Login</button>
             </div>
         </form>
     )
 }
 
-export default AuthForm;
+export default SignUpForm;

@@ -25,6 +25,15 @@ function Auth() {
             });
     }
 
+    const signUp = async (username: string, password: string) => {await axios
+            .post("http://localhost:80/api/v1/user/",{username: username, password: password})
+            .then((response) => {
+                alert("You signUp successfully!!!");
+            })
+            .catch((error) => {
+                console.error(error);
+            });}
+
     const refresh = async () => {
         await axios
             .post('http://localhost:80/api/v1/token/refresh/', { refresh: refreshToken })
@@ -48,7 +57,8 @@ function Auth() {
         localStorage.removeItem('refreshToken');
     };
 
-    const handleLogin = (formData) => { login(formData.username, formData.password); }    
+    const handleLogin = (formData) => { login(formData.username, formData.password); }
+    const handleSignUp = (formData) => { signUp(formData.username, formData.password); }
     const handleUnauthorized = () => { refresh(); }
     const handleLogout = () => { logout(); }
 
@@ -58,6 +68,7 @@ function Auth() {
             onUnauthorized={handleUnauthorized}
             onLogout={handleLogout}
             onLogin={handleLogin}
+            onSignUp={handleSignUp}
         />
     )
 }
