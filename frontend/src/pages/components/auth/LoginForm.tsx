@@ -34,7 +34,7 @@ function LoginForm(props) {
             </div>
             <div className="AuthForm-password">
                 <label htmlFor='password'>Password</label>
-                <input id='password' type="text" value={inputPassword} onChange={changePasswordHandler} />
+                <input id='password' type="password" value={inputPassword} onChange={changePasswordHandler} />
             </div>
             <div className='AuthForm-actions'>
                 <button type='submit'>Login</button>
