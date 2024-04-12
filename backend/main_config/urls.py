@@ -21,7 +21,7 @@ from rest_framework import routers
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework_simplejwt import views
 
-from api.main.views import (
+from apps.main.views import (
     UserViewSet,
     CategoryViewSet,
     ThingViewSet,
@@ -30,11 +30,11 @@ from api.main.views import (
     FeedbackViewSet,
     ImageViewSet
 )
-from api.chat.views import (
+from apps.chat.views import (
     DialogViewSet,
     MessageViewSet,
 )
-from api.loc.views import (
+from apps.loc.views import (
     CountryViewSet,
     RegionViewSet,
     CityViewSet,
