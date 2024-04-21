@@ -5,7 +5,6 @@ from rest_framework.test import APIRequestFactory, APITestCase, force_authentica
 from rest_framework import status
 
 from django.contrib.auth.models import User
-
 from apps.loc.models import Location, City, Country, Region
 
 from .models import (
@@ -15,16 +14,6 @@ from .models import (
     UserProfile,
     Trade,
     Feedback,           
-)
-
-from .views import (
-    UserViewSet,
-    CategoryViewSet,
-    ThingViewSet,
-    UserProfileViewSet,
-    TradeViewSet,
-    FeedbackViewSet,
-    ImageViewSet
 )
 
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -40,24 +29,23 @@ class CategoryTests(APITestCase):
         self.assertEqual(Category.objects.get().name, "Test")
 
 
-""" class UserProfileTests(APITestCase):
+class UserProfileTests(APITestCase):
     def test_create_user_profile(self):
-        country = Country.objects.create(name="TestCountry")
-        region = Region.objects.create(name="TestRegion", country=country.id)
-        city = City.objects.create(name="TestCity", region=region.id)
+        url = "/api/v1/userprofile/"
 
-        location = Location.objects.create(country=country.id, region=region.id, city=city.id )
+        country = Country.objects.create(name="TestCountry")
+        region = Region.objects.create(name="TestRegion", country=country)
+        city = City.objects.create(name="TestCity", region=region)
+        location = Location.objects.create(country=country, region=region, city=city )
+
         user = User.objects.create_user(username="test_user", password="password")
 
-        url = "/api/v1/userprofile/"
-        data = {
-            "user": user.id,
-            "location": location.id
-            }
+        data = {"user": user.id, "location": location.id}
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Category.objects.count(), 1)
-        self.assertEqual(Category.objects.get().name, "Test") """
+        self.assertEqual(UserProfile.objects.count(), 1)
+        self.assertEqual(UserProfile.objects.get().user, user)
+        self.assertEqual(UserProfile.objects.get().location, location)
 
 
 class ThingTests(APITestCase):
@@ -83,6 +71,9 @@ class ThingTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Thing.objects.count(), 1)
         self.assertEqual(Thing.objects.get().name, "Test Thing")
+        self.assertEqual(Thing.objects.get().description, "Test Description")
+        self.assertEqual(Thing.objects.get().category, category)
+        self.assertEqual(Thing.objects.get().owner, user)
 
 
 class TradeTests(APITestCase):
@@ -106,7 +97,9 @@ class TradeTests(APITestCase):
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Trade.objects.count(), 1)
-        self.assertEqual(Trade.objects.get().thing.name, "Test Thing")
+        self.assertEqual(Trade.objects.get().thing, thing)
+        self.assertEqual(Trade.objects.get().participant_A, user_A)
+        self.assertEqual(Trade.objects.get().participant_B, user_B)
 
 
 class FeedbackTests(APITestCase):
@@ -130,3 +123,5 @@ class FeedbackTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Feedback.objects.count(), 1)
         self.assertEqual(Feedback.objects.get().text, "Test Feedback")
+        self.assertEqual(Feedback.objects.get().rating, 5)
+        self.assertEqual(Feedback.objects.get().trade, trade)
