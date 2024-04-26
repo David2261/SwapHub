@@ -1,10 +1,10 @@
-import React from "react";
-import "./StartPage.css";
-import Header from "./components/header/Header.tsx";
-import Start from "./components/start/Start.tsx";
+import React, { useState, useEffect } from "react";
+import "../assets/styles/pages/StartPage.css";
+import axios from 'axios';
+// Components
+import Header from "../widgets/header/Header.tsx";
+// import Start from "../components/start/Start";
 
-import axios from "axios";
-import { useState, useEffect } from "react";
 
 function StartPage(props) {
   // Define state variables for startThings and things
@@ -46,7 +46,6 @@ function StartPage(props) {
   return (
     <div className="StartPage">
       <Header onClickAvatar={handleClickAvatar} />
-      <Start startThings={startThings} host={host} />
     </div>
   );
 }

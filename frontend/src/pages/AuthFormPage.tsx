@@ -1,6 +1,6 @@
-import React from "react";
-import Header from "./components/header/Header.tsx";
-import AuthForm from "./components/auth/AuthForm.tsx";
+import React from 'react';
+import Header from "../widgets/header/Header.tsx";
+import AuthForm from "../components/auth/AuthForm.tsx";
 
 
 function AuthFormPage(props) {
@@ -11,10 +11,10 @@ function AuthFormPage(props) {
     const handleLogin = (formData) => {props.onLogin(formData);}
 
     return (
-        <div className="AuthFormPage">
+        <>
             <Header onClickAvatar={handleClickAvatar} />
             <AuthForm onLogin={handleLogin} />
-        </div>
+        </>
     )
 }
 
